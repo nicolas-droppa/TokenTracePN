@@ -1,3 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.pn-node-place {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 2px solid #3b82f6;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.pn-node-transition {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: #1e293b;
+  border: 2px solid #10b981;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.react-flow__node-default {
+  padding: 0 !important;
+}
+
+.react-flow__handle {
+  /* Namiesto fixného stredu ich necháme na okrajoch, ale vynulujeme ich veľkosť */
+  background: transparent !important;
+  border: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  pointer-events: none !important;
+}
+
+/* Toto zabezpečí, že šípka zastane na okraji 40px boxu */
+.react-flow__handle-top { top: 0px !important; left: 50% !important; }
+.react-flow__handle-bottom { bottom: 0px !important; left: 50% !important; }
+.react-flow__handle-left { left: 0px !important; top: 50% !important; }
+.react-flow__handle-right { right: 0px !important; top: 50% !important; }
