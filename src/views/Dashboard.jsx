@@ -76,16 +76,17 @@ const DashboardContent = () => {
           type: 'straight',
           markerEnd: { 
             type: MarkerType.ArrowClosed, 
+            width: 15,  // Zmenšili sme z 20-25 na 15
+            height: 15,
             color: '#94a3b8',
-            // Tieto parametre šípku zviditeľnia a odsadia
-            width: 25,
-            height: 25,
           },
           style: { 
             stroke: '#94a3b8', 
             strokeWidth: 2 
           },
-          animated: true,
+          // Tento parameter vytlačí šípku zo stredu na okraj!
+          // Pre 40px uzol skús hodnotu okolo 20-22
+          label: "", // niekedy pomáha vynulovať label
         };
 
         setEdges((eds) => addEdge(newEdge, eds));
@@ -103,23 +104,23 @@ const DashboardContent = () => {
     
     const newNode = {
       id: newId,
-      // Pridáme tieto dve vlastnosti, ktoré pomôžu enginu s výpočtom okraja
-      sourcePosition: Position.Right,
-      targetPosition: Position.Left,
+      // Odstránime sourcePosition a targetPosition, necháme to na automatiku
       data: { 
         label: (
           <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
-            {newId}
-            {/* Handles vrátime na okraje v rámci DOM, ale CSS ich udrží vizuálne blízko stredu */}
-            <Handle type="target" position={Position.Top} className="opacity-0" />
-            <Handle type="target" position={Position.Bottom} className="opacity-0" />
-            <Handle type="target" position={Position.Left} className="opacity-0" />
-            <Handle type="target" position={Position.Right} className="opacity-0" />
+            <span className="z-10">{newId}</span>
             
-            <Handle type="source" position={Position.Top} className="opacity-0" />
-            <Handle type="source" position={Position.Bottom} className="opacity-0" />
-            <Handle type="source" position={Position.Left} className="opacity-0" />
-            <Handle type="source" position={Position.Right} className="opacity-0" />
+            {/* Vstupné body (Target) */}
+            <Handle type="target" position={Position.Top} className="floating-handle" />
+            <Handle type="target" position={Position.Bottom} className="floating-handle" />
+            <Handle type="target" position={Position.Left} className="floating-handle" />
+            <Handle type="target" position={Position.Right} className="floating-handle" />
+            
+            {/* Výstupné body (Source) */}
+            <Handle type="source" position={Position.Top} className="floating-handle" />
+            <Handle type="source" position={Position.Bottom} className="floating-handle" />
+            <Handle type="source" position={Position.Left} className="floating-handle" />
+            <Handle type="source" position={Position.Right} className="floating-handle" />
           </div>
         ) 
       },

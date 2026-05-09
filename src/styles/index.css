@@ -37,17 +37,28 @@ html, body, #root {
   padding: 0 !important;
 }
 
-.react-flow__handle {
-  /* Namiesto fixného stredu ich necháme na okrajoch, ale vynulujeme ich veľkosť */
-  background: transparent !important;
-  border: none !important;
+.floating-handle {
   width: 1px !important;
   height: 1px !important;
+  background: transparent !important; /* Priehľadné pozadie */
+  border: none !important;            /* Žiadny okraj */
+  outline: none !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  position: absolute !important;
   pointer-events: none !important;
+  opacity: 0 !important;              /* Pre istotu úplná priesvitnosť */
 }
 
-/* Toto zabezpečí, že šípka zastane na okraji 40px boxu */
-.react-flow__handle-top { top: 0px !important; left: 50% !important; }
-.react-flow__handle-bottom { bottom: 0px !important; left: 50% !important; }
-.react-flow__handle-left { left: 0px !important; top: 50% !important; }
-.react-flow__handle-right { right: 0px !important; top: 50% !important; }
+.react-flow__handle {
+  opacity: 0 !important;
+  background: transparent !important;
+}
+
+#react-flow__arrowclosed, 
+[id^="react-flow__arrowclosed"] {
+  /* refX posúva hrot šípky vzhľadom na koniec čiary. 
+     Pre 40px uzol je ideálna hodnota okolo 28-30, aby hrot "lízal" okraj */
+  refX: 28 !important; 
+}
